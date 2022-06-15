@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#! This file represents a very simple header header that you can use as the
+#! basis for your own jobs. Copy this file and amend it.
+
+#!#############################################################
+#!#### Modify the options in this section as appropriate ######
+#!#############################################################
+
+#! Give your job a name
+#SBATCH -J panCanSigs 
+#! How many cores per task?
+#SBATCH --cpus-per-task=2
+#! How much memory do you need?
+#SBATCH --mem=8G
+#! How much wallclock time will be required?
+#SBATCH --time=04:00:00
+#! What types of email messages do you wish to receive?
+#SBATCH --mail-type=FAIL
+#! Specify your email address here otherwise you won't recieve emails!
+#SBATCH --mail-user=philip.smith@cruk.cam.ac.uk
+#! Uncomment this to prevent the job from being requeued (e.g. if
+#! interrupted by node failure or system downtime):
+#SBATCH --no-requeue
+#! General partition
+#SBATCH -p general
+#SBATCH --output logs/slurm-%A.out
+#SBATCH --error logs/slurm-%A.err
+
+Rscript scripts/0_Signature_activities_from_CN_profiles.R

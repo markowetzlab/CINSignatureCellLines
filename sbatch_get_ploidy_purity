@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -J statjob
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH --time=02:00:00
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=philip.smith@cruk.cam.ac.uk
+#SBATCH --no-requeue
+#SBATCH -p general
+#SBATCH --output logs/slurm-%A.out
+#SBATCH --error logs/slurm-%A.err
+
+Rscript scripts/get_ploidy_purity.R

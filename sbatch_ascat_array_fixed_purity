@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -J ascat_cellLine
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=3G
+#SBATCH --time=03:00:00
+#SBATCH --array=1-1281%200
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=philip.smith@cruk.cam.ac.uk
+#SBATCH --no-requeue
+#SBATCH -p general
+#SBATCH --output logs/slurm-%A_%a.out
+#SBATCH --error logs/slurm-%A_%a.err
+
+echo -e "Array job ${SLURM_ARRAY_TASK_ID}"
+Rscript scripts/ASCAT.on.celllines_fixed_purity.R ${SLURM_ARRAY_TASK_ID}
