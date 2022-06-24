@@ -4,6 +4,7 @@ ASCAT="https://github.com/VanLoo-lab/ascat.git"
 APT_LIBS="http://www.affymetrix.com/Auth/support/downloads/library_files/genomewidesnp6_libraryfile.zip"
 PENNCNV="https://github.com/WGLab/PennCNV.git"
 ASCATSC="https://github.com/VanLoo-lab/ASCAT.sc.git"
+CINSigQuant="https://github.com/markowetzlab/CINSignatureQuantification.git"
 
 APT_BASE=$(basename ${APT})
 wget -c -P "resources/" ${APT}
@@ -16,6 +17,9 @@ mv ascat resources/
 
 git clone ${ASCATSC} 
 mv ASCAT.sc resources/
+
+git clone ${CINSigQuant}
+mv CINSignatureQuantification resources/
 
 if ! [ -d "refs" ]; then
 	mkdir refs
@@ -37,4 +41,6 @@ cp refs/PennCNV/kcolumn.pl resources/apt_2.11.4_linux_64_bit_x86_binaries/bin/
 
 Rscript -e 'devtools::install("resources/ascat/ASCAT")'
 Rscript -e 'devtools::install("resources/ASCAT.sc/")'
+Rscript -e 'devtools::install("resources/CINSignatureQuantification/")'
+
 

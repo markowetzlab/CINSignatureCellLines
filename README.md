@@ -1,19 +1,20 @@
-# cell-line-signatures
+# CINSignatureCellLines
 Code base used to generate copy number signatures from pan-cancer cell line SNP6.0 array data used to generate copy number signatures as part of the publication "A pan-cancer compendium of chromosomal instability"
 
-A final version of this data can be found [here](https://github.com/VanLoo-lab/ASCAT.sc).
+Final absolute copy number profiles from this data can be found [here](https://github.com/VanLoo-lab/ASCAT.sc).
+COpy number signatures can be easily generated from these profiles using the [CINSignatureQuantification](https://github.com/markowetzlab/CINSignatureQuantification) package
 
 ## Reproducing cell line data
 ### Setup
 Clone this git repository and `cd` into the directory
 ```
-git clone https://github.com/Phil9S/cell-line-signatures.git
-cd cell-line-signatures
+git clone https://github.com/markowetzlab/CINSignatureCellLines
+cd CINSignatureCellLines
 ```
 Install the conda environment
 ```
-conda create --name cell-line-signatures --file conda_env.txt
-conda activate cell-line-signatures
+conda create --name CINSignatureCellLines --file conda_env.txt
+conda activate CINSignatureCellLines
 ```
 Run the setup bash script to install remote resources and reference files
 ```
@@ -98,14 +99,10 @@ sbatch sbatch_genPanCanSigs
 ```
 or
 ```
-Rscript scripts/0_Signature_activities_from_CN_profiles.R
-```
-### Finalise copy number signatures
-```
-Rscript scripts/finalise_signatures.R
+Rscript scripts/quantify_signatures.R
 ```
 
-The final output is a `RDS object` called `cellLine_signature_data.rds` which contains the copy nubmer segment data(`copy_number`), threshold corrected signatures (`signatures`), raw signature exposures (`signatures.raw`), and z-score normalised and threshold corrected signatures (`signatures.zscore`). 
+The final output is a `RDS object` called `cellLine_signature_data.rds` which contains the CINSignatureQuantification object containing the signatures. A matrix of the threshold-corrected cell line by signature exposure is also written to the same directory.
 
 ## Licence
 The contents of this repository are copyright (c) 2022, University of Cambridge and Spanish National Cancer Research Centre (CNIO).
