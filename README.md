@@ -2,7 +2,7 @@
 Code base used to generate copy number signatures from pan-cancer cell line SNP6.0 array data used to generate copy number signatures as part of the publication "A pan-cancer compendium of chromosomal instability"
 
 Final absolute copy number profiles (hg19) for these cell lines can be found [here](https://github.com/VanLoo-lab/ASCAT.sc).
-Copy number signatures can be easily generated from these profiles using the [CINSignatureQuantification](https://github.com/markowetzlab/CINSignatureQuantification) package
+Copy number signatures can be easily generated from these profiles using the [CINSignatureQuantification](https://github.com/markowetzlab/CINSignatureQuantification) package.
 
 ## Reproducing cell line data
 ### Setup
