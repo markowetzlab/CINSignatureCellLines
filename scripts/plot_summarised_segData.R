@@ -38,6 +38,7 @@ plot_seg_table <- function(segTable = NULL){
   }
 }
 
+## Plots below were used during method development of cell line-specific fitting - not required
 tcga <- read.table("resources/ASCAT_metadata_TCGA_PCAWG_with_dCIN_extended.txt",header = T)
 cellLine <- read.table("data/ascat_results/ascat_profile_statistics.tsv",sep = "\t",header = F)
 cellLine_fixed <- read.table("data/ascat_results/ascat_sc_profile_statistics.tsv",sep = "\t",header = F)
@@ -55,28 +56,28 @@ cellLine_fixed$group <- rep("cellLine_fixed",times=nrow(cellLine_fixed))
 
 plot.d <- rbind(tcga,cellLine,cellLine_fixed)
 
-pl_pur <- ggplot(plot.d) + geom_point(aes(ploidy,purity,color = group),alpha = 0.5) +
-  geom_smooth(aes(ploidy,purity,color = group),method = "lm") + theme_bw()
+#pl_pur <- ggplot(plot.d) + geom_point(aes(ploidy,purity,color = group),alpha = 0.5) +
+#  geom_smooth(aes(ploidy,purity,color = group),method = "lm") + theme_bw()
 
-png(filename = "data/ascat_ascatsc_plpur.png",width = 10,height = 8,units = "in",res = 300)
-print(pl_pur)
-dev.off()
+#png(filename = "data/ascat_ascatsc_plpur.png",width = 10,height = 8,units = "in",res = 300)
+#print(pl_pur)
+#dev.off()
 
-pl_plot <- ggplot(plot.d) +
-  geom_density(aes(ploidy,fill = group),alpha = 0.5) +
-  theme_bw()
+#pl_plot <- ggplot(plot.d) +
+#  geom_density(aes(ploidy,fill = group),alpha = 0.5) +
+#  theme_bw()
 
-png(filename = "data/ascat_ascatsc_ploidy.png",width = 10,height = 8,units = "in",res = 300)
-print(pl_plot)
-dev.off()
+#png(filename = "data/ascat_ascatsc_ploidy.png",width = 10,height = 8,units = "in",res = 300)
+#print(pl_plot)
+#dev.off()
 
-pur_plot <- ggplot(plot.d) +
-  geom_density(aes(purity,fill = group),alpha = 0.5) +
-  theme_bw()
+#pur_plot <- ggplot(plot.d) +
+#  geom_density(aes(purity,fill = group),alpha = 0.5) +
+#  theme_bw()
 
-png(filename = "data/ascat_ascatsc_purity.png",width = 10,height = 8,units = "in",res = 300)
-print(pur_plot)
-dev.off()
+#png(filename = "data/ascat_ascatsc_purity.png",width = 10,height = 8,units = "in",res = 300)
+#print(pur_plot)
+#dev.off()
 
 ## plot and compare profiles
 
@@ -90,25 +91,25 @@ plot_seg_table(segTable = seg_data)
 
 ## Clonality diffs
 
-seg_data_diffs <- seg_data %>%
-  group_by(sample) %>%
-  mutate(rCN = round(segVal)) %>%
-  mutate(diffs = abs(segVal - rCN)) %>%
-  summarise(across(diffs,mean)) %>%
-  mutate(group = rep("ascat.fixed",times=nrow(.)))
+#seg_data_diffs <- seg_data %>%
+#  group_by(sample) %>%
+#  mutate(rCN = round(segVal)) %>%
+#  mutate(diffs = abs(segVal - rCN)) %>%
+#  summarise(across(diffs,mean)) %>%
+#  mutate(group = rep("ascat.fixed",times=nrow(.)))
 
-comb_seg_data_diffs <- seg_data_diffs
+#comb_seg_data_diffs <- seg_data_diffs
 
-cl_plot <- ggplot(comb_seg_data_diffs) +
+#cl_plot <- ggplot(comb_seg_data_diffs) +
   #geom_point(aes(group,diffs),position = "jitter") +
-  labs(title = "Clonality function values",subtitle = "Error function measure of distance from integer state") +
-  geom_violin(aes(group,diffs,fill=group),alpha = 0.5) +
-  ggsignif::geom_signif(aes(group,diffs),comparisons = list(c("ascat","ascat.fixed"),c("ascat.sc","ascat.fixed"))) +
-  theme_bw()
+#  labs(title = "Clonality function values",subtitle = "Error function measure of distance from integer state") +
+#  geom_violin(aes(group,diffs,fill=group),alpha = 0.5) +
+  #ggsignif::geom_signif(aes(group,diffs),comparisons = list(c("ascat","ascat.fixed"),c("ascat.sc","ascat.fixed"))) +
+#  theme_bw()
 
-png(filename = "data/ascat_ascatsc_clonality.png",width = 10,height = 8,units = "in",res = 300)
-print(cl_plot)
-dev.off()
+#png(filename = "data/ascat_ascatsc_clonality.png",width = 10,height = 8,units = "in",res = 300)
+#print(cl_plot)
+#dev.off()
 
 ## Construct QC table
 plot.list <- list.files(path = "data/cellPlotsComp/",pattern = "*.png")
